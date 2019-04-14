@@ -1,8 +1,6 @@
 environment:
 
   matrix:
-    - PYTHON: "C:\\Python35-x64"
-      PYTHON_VERSION: "3.5"
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6"
     - PYTHON: "C:\\Python37-x64"
@@ -12,8 +10,7 @@ install:
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
   - cd test
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
-  - "%PYTHON%\\python.exe -m pip install mock"
 build: off
 
 test_script:
-  "%PYTHON%/Scripts/nosetests --with-coverage --cover-package pyecharts --cover-package test && cd .. && %PYTHON%/Scripts/flake8 --exclude docs --builtins=unicode,xrange,long,basestring"
+  - "%PYTHON%/Scripts/nosetests --with-coverage --cover-package pyecharts --cover-package test && cd .. && %PYTHON%/Scripts/flake8 --exclude build --max-line-length 89 --ignore=F401"
